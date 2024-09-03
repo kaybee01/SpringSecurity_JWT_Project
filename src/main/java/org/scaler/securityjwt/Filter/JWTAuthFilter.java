@@ -56,7 +56,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
             Long userId = null;
             try {
-                userId = jwtService.getUserIdfromToken(token);
+                userId = jwtService.getUserIdFromToken(token);
             } catch (Exception e) {
                 System.out.println("Invalid JWT Token: " + e.getMessage());
                 filterChain.doFilter(request, response);

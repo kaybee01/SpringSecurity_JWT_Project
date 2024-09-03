@@ -1,10 +1,10 @@
 package org.scaler.securityjwt.Service;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.scaler.securityjwt.Model.Token;
+
 import org.scaler.securityjwt.Model.User;
 import org.scaler.securityjwt.Config.UserConfig;
-import org.scaler.securityjwt.Repo.TokenRepo;
+//import org.scaler.securityjwt.Repo.TokenRepo;
 import org.scaler.securityjwt.Repo.UserRepo;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,14 +26,14 @@ public class UserServiceImpl implements  UserDetailsService {
 
     private BCryptPasswordEncoder encoder;
     private UserRepo userRepo;
-    private TokenRepo tokenRepo;
+//    private TokenRepo tokenRepo;
 //    private AuthenticationManager authenticationManager;
 //    private JWTService jwtService;
 
-    UserServiceImpl(BCryptPasswordEncoder encoder,UserRepo userRepo,TokenRepo tokenRepo){
+    UserServiceImpl(BCryptPasswordEncoder encoder,UserRepo userRepo){
         this.encoder=encoder;
         this.userRepo=userRepo;
-        this.tokenRepo=tokenRepo;
+      //  this.tokenRepo=tokenRepo;
 //        this.authenticationManager=authenticationManager;
 //        this.jwtService=jwtService;
     }

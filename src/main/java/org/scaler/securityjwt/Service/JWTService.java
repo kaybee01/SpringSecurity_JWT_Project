@@ -1,9 +1,9 @@
 package org.scaler.securityjwt.Service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.scaler.securityjwt.Model.Token;
+//import org.scaler.securityjwt.Model.Token;
+import io.jsonwebtoken.security.SignatureException;
 import org.scaler.securityjwt.Model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,18 +23,27 @@ public class JWTService {
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(User user) {
+    public String generateAccessToken(User user) {
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
                 .claim("roles", user.getRoles().toString())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*10))
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*5))
                 .signWith(getSecretKey())
                 .compact();
         }
 
-    public Long getUserIdfromToken(String token) {
+    public String generateRefreshToken(User user) {
+        return Jwts.builder()
+                .subject(user.getId().toString())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*30))
+                .signWith(getSecretKey())
+                .compact();
+    }
+
+    public Long getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(getSecretKey())
                 .build()
@@ -42,4 +51,8 @@ public class JWTService {
                 .getPayload();
         return Long.valueOf(claims.getSubject());
     }
+
+
+
+
 }

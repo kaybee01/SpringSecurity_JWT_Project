@@ -1,5 +1,6 @@
 package org.scaler.securityjwt.Repo;
 
+
 import org.scaler.securityjwt.Model.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 

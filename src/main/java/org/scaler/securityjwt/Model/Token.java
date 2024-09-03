@@ -12,6 +12,6 @@ public class Token extends BaseModel{
     private String value;
     private Date expiry;
     private Boolean isValid;
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 }
